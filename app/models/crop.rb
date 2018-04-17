@@ -204,6 +204,10 @@ class Crop < ActiveRecord::Base
     CropSearchService.search(query)
   end
 
+  def self.growingNearMe(location, radius)
+    GrowingNearMeService.search(location, radius)
+  end
+
   def self.case_insensitive_name(name)
     where(["lower(crops.name) = :value", { value: name.downcase }])
   end
