@@ -48,6 +48,20 @@ class CropsController < ApplicationController
     respond_with @matches
   end
 
+  def growingNearMe
+    @borough = params[:borough]
+    @citytown = params[:citytown]
+    @county = params[:county]
+    @stateprovince = params[:stateprovince]
+    @country = params[:country]
+    @location = @borough + ", " + @citytown + ", " + @county + ", " + @stateprovince + ", " + @country
+    @radius = params[:radius]
+    @matches = Crop.growingNearMe(@location, @radius)
+    @paginated_matches = @matches.paginate(page: params[:page])
+
+    respond_with @matches
+  end
+
   def show
     @crop = Crop.includes(:scientific_names, plantings: :photos).find(params[:id])
     @posts = @crop.posts.order(created_at: :desc).paginate(page: params[:page])
