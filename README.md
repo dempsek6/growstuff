@@ -1,3 +1,15 @@
+# What's Growing Near Me?
+
+This is a forked Growstuff repository with code for a "What's Growing Near Me?" function added to it.  "What's Growing Near Me" allows a user to input their location, and see what crops are being grown within a certain mile radius of that location (the user also inputs the mile radius).  Here are the files I have altered:
+- crop.rb now contains a self.growingNearMe function. (line 207)
+- crops_controller.rb now contains a growingNearMe function (line 51)
+Here are new files I have added:
+- "views" now contains a file called growingNearMe.html.haml
+- "services" now contains a file called growing_near_me_service.rb
+This code has issues, which are documented in the "issues" tab of this forked repository.
+
+Growstuff's original ReadMe is below.
+
 # Growstuff
 
 [![Build Status](https://travis-ci.org/Growstuff/growstuff.svg?branch=dev)](https://travis-ci.org/Growstuff/growstuff)
