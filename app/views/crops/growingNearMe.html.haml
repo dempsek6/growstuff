@@ -1,0 +1,65 @@
+- if @location and @radius
+  - content_for :title, "What's Growing Near \"#{@location}\""
+  - if @matches
+    - content_for :subtitle, "#{@matches.size} total"
+- else
+  - content_for :title, "What's Growing Near You!"
+
+%div
+  = form_tag growing_near_me, method: :get, id: 'growing-near-me', class: 'form-inline' do
+    .form-group
+      = label_tag :term, "Borough:", class: 'sr-only'
+      = text_field_tag 'term', nil,
+                       class: 'search-query input-medium form-control',
+                       placeholder: 'Borough',
+                       value: @borough
+      = label_tag :term, "City/Town (Required):", class: 'sr-only'
+      = text_field_tag 'term', nil,
+                       class: 'search-query input-medium form-control',
+                       placeholder: 'City/Town (Required)',
+                       value: @citytown
+      = label_tag :term, "County:", class: 'sr-only'
+      = text_field_tag 'term', nil,
+                       class: 'search-query input-medium form-control',
+                       placeholder: 'County',
+                       value: @county
+      = label_tag :term, "State/Province (Required):", class: 'sr-only'
+      = text_field_tag 'term', nil,
+                       class: 'search-query input-medium form-control',
+                       placeholder: 'State/Province (Required)',
+                       value: @stateprovince
+      = label_tag :term, "Country (Required)", class: 'sr-only'
+      = text_field_tag 'term', nil,
+                       class: 'search-query input-medium form-control',
+                       placeholder: 'Country (Required)',
+                       value: @country
+    = submit_tag "Search", class: 'btn btn-primary'
+    %p
+        Find me crops within a
+    %p
+      = number_field_tag 'num', nil,
+                       class: 'search-query input-medium form-control',
+                       min: 1,
+                       value: @radius
+
+- if @matches.empty?
+  %h2 No results found
+  %p
+    Sorry, we couldn't find any crops that matched your search for "#{@term}".
+  %p
+    Try
+    = link_to "browsing our crop database", crops_path
+    instead.
+
+- else
+  .pagination
+    = will_paginate @paginated_matches
+
+  #paginated_matches
+    .row
+      - @paginated_matches.each do |c|
+        .col-md-2.six-across
+          = render partial: "thumbnail", locals: { crop: c }
+
+  .pagination
+    = will_paginate @paginated_matches
