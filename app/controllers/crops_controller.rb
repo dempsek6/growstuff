@@ -48,7 +48,7 @@ class CropsController < ApplicationController
     respond_with @matches
   end
 
-  def growingNearMe
+  def growing_near_me
     @borough = params[:borough]
     @citytown = params[:citytown]
     @county = params[:county]
