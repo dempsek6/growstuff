@@ -37,8 +37,6 @@
 .pagination
   = will_paginate @crops
 
-%p We are above the code for growingNearMe.
-
 - if @location and @radius
   - content_for :title, "What's Growing Near \"#{@location}\""
   - if @matches
@@ -46,10 +44,8 @@
 - else
   - content_for :title, "What's Growing Near You!"
 
-%p We are above the form for growingNearMe.
-
 %div
-  = form_tag search, method: :get, id: 'growing-near-me', class: 'form-inline' do
+  = form_tag crops_growing_near_me_path, method: :get, id: 'growing-near-me', class: 'form-inline' do
     .form-group
       = label_tag :term, "Borough:", class: 'sr-only'
       = text_field_tag 'term', nil,
@@ -76,16 +72,19 @@
                        class: 'search-query input-medium form-control',
                        placeholder: 'Country (Required)',
                        value: @country
-    = submit_tag "Search", class: 'btn btn-primary'
     %p
+       
       Find me crops within a
     %p
       = number_field_tag 'num', nil,
                        class: 'search-query input-medium form-control',
-                       min: 1,
+                       min: 1, placeholder: '#',
                        value: @radius
-
-- if @matches.empty?
+    %p
+      mile radius.
+    %p
+    =submit_tag "Search", class: 'btn btn-primary'
+- if @matches.nil?
   %h2 No results found
   %p
     Sorry, we couldn't find any crops that matched your search for "#{@term}".
@@ -106,8 +105,6 @@
 
   .pagination
     = will_paginate @paginated_matches
-
-%p We are below the form and code for growingNearMe.
 
 %ul.list-inline
   %li The data on this page is available in the following formats:
