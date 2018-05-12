@@ -6,6 +6,7 @@ This is a forked Growstuff repository with code for a "What's Growing Near Me?" 
 Here are new files I have added:
 - "views" now contains a file called growingNearMe.html.haml
 - "services" now contains a file called growing_near_me_service.rb
+- "index.html.haml" in views/crops now has code for a "What's Growing Near Me" search bar towards the bottom.  On the app itself, this searh bar can be seen below the list of crops.  This code has issues, documented in the "issues" tab.
 This code has issues, which are documented in the "issues" tab of this forked repository.
 
 Growstuff's original ReadMe is below.
